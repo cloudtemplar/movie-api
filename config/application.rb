@@ -23,6 +23,7 @@ module MovieApi
   class Application < Rails::Application
     config.autoload_paths += %W[
       #{config.root}/app/domain
+      #{config.root}/app/graphql
     ]
 
     # Initialize configuration defaults for originally generated Rails version.
