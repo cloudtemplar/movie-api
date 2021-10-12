@@ -1,7 +1,17 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# frozen_string_literal: true
+
+MOVIES = {
+  'The Fast and the Furious' =>	'tt0232500',
+  '2 Fast 2 Furious' => 'tt0322259',
+  'The Fast and the Furious: Tokyo Drift' => 'tt0463985',
+  'Fast & Furious' =>	'tt1013752',
+  'Fast Five' => 'tt1596343',
+  'Fast & Furious 6' =>	'tt1905041',
+  'Furious 7' => 'tt2820852',
+  'The Fate of the Furious' => 'tt4630562'
+}.freeze
+
+MOVIES.each do |title, omdb_id|
+  print '.'
+  Catalog::Movies::Repository.create(title: title, movies_api_id: omdb_id)
+end
