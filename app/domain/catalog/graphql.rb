@@ -5,5 +5,13 @@ module Catalog
     def self.resolver
       Resolver
     end
+
+    def self.mutations
+      Catalog::Graphql::Mutations
+    end
+
+    def self.add_movie
+      Graphql::AddMovie
+    end
   end
 end
