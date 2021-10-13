@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCatalogMovies < ActiveRecord::Migration[6.1]
   def change
     create_table :catalog_movies, id: :uuid do |t|
