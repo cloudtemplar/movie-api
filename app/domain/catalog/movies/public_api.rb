@@ -7,8 +7,12 @@ module Catalog
         Repository.all
       end
 
-      def add_movie(title, movies_api_id)
-        Repository.create(title: title, movies_api_id: movies_api_id)
+      def add_movie(movie_payload)
+        attributes = movie_payload
+                     .deep_transform_keys { |k| k.underscore.to_sym }
+                     .except(:type, :response)
+
+        Catalog::Movies::Repository.create(**attributes)
       end
     end
   end

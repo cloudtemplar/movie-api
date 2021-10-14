@@ -11,7 +11,15 @@ MOVIES = {
   'The Fate of the Furious' => 'tt4630562'
 }.freeze
 
-MOVIES.each do |title, omdb_id|
+# I know I should not rely on calling external APIs when seeding my data.
+# This is a conscious decision to use a shortcut like that.
+
+MOVIES.each do |_title, omdb_id|
   print '.'
-  Catalog::Movies::Repository.create(title: title, movies_api_id: omdb_id)
+  movies_api_response = Catalog::Services::OmdbClient
+                        .movie(omdb_id)
+                        .deep_transform_keys { |k| k.underscore.to_sym }
+                        .except(:type, :response)
+
+  Catalog::Movies::Repository.create(**movies_api_response)
 end

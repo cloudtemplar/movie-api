@@ -10,17 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_14_121706) do
+ActiveRecord::Schema.define(version: 2021_10_14_143306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "catalog_movies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
-    t.string "movies_api_id", null: false
+    t.string "imdb_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["movies_api_id"], name: "index_catalog_movies_on_movies_api_id", unique: true
+    t.string "year"
+    t.string "rated"
+    t.string "released"
+    t.string "runtime"
+    t.string "genre"
+    t.string "director"
+    t.string "writer"
+    t.string "actors"
+    t.string "plot"
+    t.string "language"
+    t.string "country"
+    t.string "awards"
+    t.string "poster"
+    t.string "metascore"
+    t.string "imdb_rating"
+    t.string "imdb_votes"
+    t.string "dvd"
+    t.string "box_office"
+    t.string "production"
+    t.string "website"
+    t.jsonb "ratings", default: []
+    t.index ["imdb_id"], name: "index_catalog_movies_on_imdb_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

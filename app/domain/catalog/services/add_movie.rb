@@ -5,7 +5,7 @@ module Catalog
     class AddMovie
       def self.call(movies_api_id)
         movies_api_response = OmdbClient.movie(movies_api_id)
-        Movies.add_movie(movies_api_response['Title'], movies_api_response['imdbID'])
+        Movies.add_movie(movies_api_response)
       end
     end
   end
