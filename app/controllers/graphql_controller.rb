@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GraphqlController < ApplicationController
+  before_action :authenticate_request
   # If accessing from outside this domain, nullify the session
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
@@ -11,8 +12,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user
     }
     result = MovieApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -23,6 +23,14 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+  def authenticate_request
+    warden.authenticate!(:api_token) unless introspection_query?
+  end
+
+  def introspection_query?
+    params[:operationName] == 'IntrospectionQuery'
+  end
 
   # Handle variables in form data, JSON body, or a blank value
   def prepare_variables(variables_param)
