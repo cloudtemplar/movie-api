@@ -31,6 +31,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'devise'
 
+gem 'dry-struct'
+gem 'dry-types'
+
 gem 'graphiql-rails'
 gem 'graphql'
 
