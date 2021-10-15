@@ -1,0 +1,8 @@
+mutation ($input: AddMovieInput!) {
+  result: catalogAddMovie(input: $input) {
+    movie {
+      title
+      moviesApiId
+    }
+  }
+}
