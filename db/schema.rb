@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_10_14_143306) do
     t.index ["imdb_id"], name: "index_catalog_movies_on_imdb_id", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
