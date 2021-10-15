@@ -27,6 +27,11 @@ module Catalog
         field :production, String, null: true
         field :website, String, null: true
         field :ratings, [RatingsType], null: true
+        field :user_rating, Rating.graphql.user_rating_type, null: true
+
+        def user_rating
+          Rating.user_rating(context[:current_user], object.id)
+        end
       end
     end
   end

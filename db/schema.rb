@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_15_120317) do
+ActiveRecord::Schema.define(version: 2021_10_15_160022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 2021_10_15_120317) do
     t.string "website"
     t.jsonb "ratings", default: []
     t.index ["imdb_id"], name: "index_catalog_movies_on_imdb_id", unique: true
+  end
+
+  create_table "rating_ratings", force: :cascade do |t|
+    t.string "catalog_movie_id", null: false
+    t.string "rating", null: false
+    t.string "rater_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["catalog_movie_id", "rater_id"], name: "index_rating_ratings_on_catalog_movie_id_and_rater_id"
   end
 
   create_table "show_shows", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
