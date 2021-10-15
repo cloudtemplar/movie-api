@@ -3,8 +3,16 @@
 module Catalog
   module Movies
     module PublicApi
+      class CatalogMovieNotFound < StandardError; end
+
       def catalog
         Repository.all
+      end
+
+      def find_movie(catalog_id)
+        Repository.find(catalog_id)
+      rescue ActiveRecord::RecordNotFound
+        raise CatalogMovieNotFound
       end
 
       def add_movie(movie_payload)

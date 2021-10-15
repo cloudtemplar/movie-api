@@ -3,10 +3,12 @@
 module Catalog
   module Graphql
     class Resolver < ::BaseResolver
-      type ::Catalog::Graphql::CatalogType, null: false
+      type [Movies::Graphql::MovieType], null: false
 
-      def resolve
-        true
+      argument :catalog_movie_id, String, required: false
+
+      def resolve(**attributes)
+        authorized_scope Catalog::Movies.catalog, context: { user: context[:current_user] }
       end
     end
   end

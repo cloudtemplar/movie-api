@@ -13,5 +13,9 @@ module Catalog
     def self.add_movie
       Graphql::AddMovie
     end
+
+    def self.movie_type
+      Movies::Graphql::MovieType
+    end
   end
 end
