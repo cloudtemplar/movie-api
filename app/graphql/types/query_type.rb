@@ -7,5 +7,6 @@ module Types
     include GraphQL::Types::Relay::HasNodesField
 
     field :catalog, resolver: Catalog.graphql.resolver
+    field :shows, resolver: Show.graphql.resolver
   end
 end
